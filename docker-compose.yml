@@ -1,6 +1,10 @@
 version: "3"
 services:
-  server:
+  heroes-gui:
     build: .
     ports:
       - "8880:3000"
+  heroes-api:
+    build: ../angular-tour-of-heroes-server/.
+    ports:
+      - "3002:3002"
