@@ -1,18 +1,15 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'my-app',
   styleUrls: [ './app.component.css' ],
-  template: `
-    <h1>{{title}}</h1>
-    <nav>
-      <a routerLink="/dashboard">Dashboard</a>
-      <a routerLink="/heroes">Heroes</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent {
+
   title = 'Tour of Heroes';
+
+  constructor(private authService: AuthService) {}
 }

@@ -1,0 +1,2 @@
+-   [x] Refactor to use a-simple-authentication-service, i.e. not use Auth0 
+-   [ ] Don't send password in text

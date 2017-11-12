@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+<nav>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/heroes">Heroes</a>
+  <a routerLink="/secret-heroes" *ngIf="authService.loggedIn()" routerLinkActive="active">Secret Heroes</a>
+  <a routerLink="/login" *ngIf="!authService.loggedIn()">Login</a>
+  <a (click)=authService.logout() *ngIf="authService.loggedIn()">Logout</a>
+</nav>
+<router-outlet></router-outlet>
