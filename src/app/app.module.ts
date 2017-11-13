@@ -19,6 +19,8 @@ import { HeroSearchComponent } from './hero-search.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import { LoginComponent } from './login.component';
+import { SecretHeroesComponent } from './secret-heroes.component';
+import { SecretHeroDetailComponent } from './secret-hero-detail.component';
 
 @NgModule({
   imports:      [
@@ -34,6 +36,8 @@ import { LoginComponent } from './login.component';
     HeroDetailComponent,
     HeroesComponent,
     HeroSearchComponent,
+    SecretHeroesComponent,
+    SecretHeroDetailComponent,
     LoginComponent
   ],
   providers: [

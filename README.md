@@ -12,3 +12,7 @@ Image from <https://medium.com/vandium-software/5-easy-steps-to-understanding-js
 ## login
 
 Based on <http://angularjs.blogspot.no/2016/11/easy-angular-authentication-with-json.html>
+
+## guard
+
+Based on <https://github.com/auth0-blog/angular2-tour-of-heroes>

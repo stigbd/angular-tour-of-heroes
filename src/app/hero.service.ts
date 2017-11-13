@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,9 +10,10 @@ import { Hero } from './hero';
 export class HeroService {
 
   private heroesUrl = 'http://localhost:3002/api/public/heroes'; // URL to web api
+  private secretHeroesUrl = 'http://localhost:3002/api/secret/heroes'; // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authHttp: AuthHttp) { }
 
   getHeroes(): Promise<Hero[]> {
     return this.http.get(this.heroesUrl)
@@ -53,6 +55,31 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+// ------------- Secret heroes ----------------------
+
+// Get all secret heroes
+  getSecretHeroes(): Promise<Hero[]> {
+    return this.authHttp
+      .get(this.secretHeroesUrl)
+      .toPromise()
+      .then(response => response.json() as Hero[])
+      .catch(this.handleError);
+  }
+
+  // Delete secret hero
+  deleteSecret(hero: Hero): Promise<Response> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    let url = `${this.secretHeroesUrl}/${hero.id}`;
+
+    return this.authHttp
+      .delete(url, { headers: headers })
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+// ------------- Error handling ---------------------
   private handleError(error: any): Promise<any> {
     console.error('An error occured', error) //for demo purposes only
     return Promise.reject(error.message || error);
