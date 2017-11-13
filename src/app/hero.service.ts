@@ -79,6 +79,15 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+  updateSecret(hero: Hero): Promise<Hero> {
+    const url = `${this.secretHeroesUrl}/${hero.id}`;
+    return this.http
+    .put(url, JSON.stringify(hero), {headers: this.headers})
+    .toPromise()
+    .then(() => hero)
+    .catch(this.handleError);
+  }
+
 // ------------- Error handling ---------------------
   private handleError(error: any): Promise<any> {
     console.error('An error occured', error) //for demo purposes only
