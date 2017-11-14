@@ -20,6 +20,10 @@ export class SecretHeroesComponent implements OnInit {
     private router: Router,
     private heroService: HeroService) { }
 
+  ngOnInit(): void {
+    this.getSecretHeroes();
+  }
+
   getSecretHeroes(): void {
     this.heroService
       .getSecretHeroes()
@@ -27,18 +31,25 @@ export class SecretHeroesComponent implements OnInit {
       .catch(error => this.error = error);
   }
 
-  addSecretHero(): void {
-    this.addingHero = true;
-    this.selectedHero = null;
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
   }
 
-  close(savedHero: Hero): void {
-    this.addingHero = false;
-    if (savedHero) { this.getSecretHeroes(); }
+  gotoDetail(): void {
+    this.router.navigate(['/secret-detail', this.selectedHero.id]);
   }
 
-  deleteSecretHero(hero: Hero, event: any): void {
-    event.stopPropagation();
+  addSecretHero(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.createSecret(name)
+      .then(hero => {
+        this.secretHeroes.push(hero);
+        this.selectedHero = null;
+      });
+  }
+
+  deleteSecretHero(hero: Hero): void {
     this.heroService
       .deleteSecret(hero)
       .then(res => {
@@ -46,18 +57,5 @@ export class SecretHeroesComponent implements OnInit {
         if (this.selectedHero === hero) { this.selectedHero = null}
       })
       .catch(error => this.error = error);
-  }
-
-  ngOnInit(): void {
-    this.getSecretHeroes();
-  }
-
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.addingHero = false;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/secret-detail', this.selectedHero.id]);
   }
 }

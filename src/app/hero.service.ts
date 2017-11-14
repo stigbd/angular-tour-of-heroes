@@ -66,6 +66,15 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+  // Create secret hero
+  createSecret(name: string): Promise<Hero> {
+    return this.authHttp
+      .post(this.secretHeroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json() as Hero)
+      .catch(this.handleError);
+  }
+
   // Delete secret hero
   deleteSecret(hero: Hero): Promise<Response> {
     let headers = new Headers();
