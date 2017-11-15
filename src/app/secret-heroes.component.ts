@@ -30,7 +30,6 @@ export class SecretHeroesComponent implements OnInit {
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
-    console.log('Id of selectedHero',this.selectedHero.id);
   }
 
   gotoDetail(): void {
