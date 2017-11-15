@@ -66,6 +66,15 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+// Get secret hero
+  getSecretHero(id: number): Promise<Hero> {
+    const url = `${this.secretHeroesUrl}/${id}`;
+    return this.authHttp.get(url)
+    .toPromise()
+    .then(response => response.json() as Hero)
+    .catch(this.handleError)
+  }
+
   // Create secret hero
   createSecret(name: string): Promise<Hero> {
     return this.authHttp
@@ -90,7 +99,7 @@ export class HeroService {
 
   updateSecret(hero: Hero): Promise<Hero> {
     const url = `${this.secretHeroesUrl}/${hero.id}`;
-    return this.http
+    return this.authHttp
     .put(url, JSON.stringify(hero), {headers: this.headers})
     .toPromise()
     .then(() => hero)

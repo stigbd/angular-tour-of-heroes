@@ -5,7 +5,7 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
 @Component({
-  selector: 'my-heroes',
+  selector: 'my-secret-heroes',
   templateUrl: './secret-heroes.component.html',
   styleUrls: ['./secret-heroes.component.css']
 })
@@ -13,8 +13,6 @@ import { HeroService } from './hero.service';
 export class SecretHeroesComponent implements OnInit {
   secretHeroes: Hero[];
   selectedHero: Hero;
-  addingHero = false;
-  error: any;
 
   constructor(
     private router: Router,
@@ -28,15 +26,15 @@ export class SecretHeroesComponent implements OnInit {
     this.heroService
       .getSecretHeroes()
       .then(heroes => this.secretHeroes = heroes)
-      .catch(error => this.error = error);
   }
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+    console.log('Id of selectedHero',this.selectedHero.id);
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/secret-detail', this.selectedHero.id]);
+    this.router.navigate(['secret-detail', this.selectedHero.id]);
   }
 
   addSecretHero(name: string): void {
@@ -56,6 +54,5 @@ export class SecretHeroesComponent implements OnInit {
         this.secretHeroes = this.secretHeroes.filter(h => h !== hero);
         if (this.selectedHero === hero) { this.selectedHero = null}
       })
-      .catch(error => this.error = error);
   }
 }

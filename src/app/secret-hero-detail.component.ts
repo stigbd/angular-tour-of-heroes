@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap  } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,10 +14,8 @@ import { HeroService } from './hero.service';
 })
 
 export class SecretHeroDetailComponent implements OnInit {
-  @Input() hero: Hero;
-  @Output() close = new EventEmitter();
-  error: any;
-  navigated = false; // true if navigated here
+
+  hero: Hero;
 
   constructor(
     private heroService: HeroService,
@@ -27,7 +25,7 @@ export class SecretHeroDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-    .switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id')))
+    .switchMap((params: ParamMap) => this.heroService.getSecretHero(+params.get('id')))
     .subscribe(hero => this.hero = hero);
   }
 
