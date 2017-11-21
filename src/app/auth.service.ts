@@ -20,6 +20,7 @@ export class AuthService {
       data => localStorage.setItem('token', data.token),
       error => console.error(error)
     );
+    this.router.navigateByUrl('/dashboard');
   }
 
   logout() {

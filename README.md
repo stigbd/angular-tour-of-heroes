@@ -16,3 +16,7 @@ Based on <http://angularjs.blogspot.no/2016/11/easy-angular-authentication-with-
 ## guard
 
 Based on <https://github.com/auth0-blog/angular2-tour-of-heroes>
+
+## Tests
+
+Based on <https://semaphoreci.com/community/tutorials/a-tdd-approach-to-building-a-todo-api-using-node-js-and-mongodb>

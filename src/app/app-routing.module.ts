@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'heroes', component: HeroesComponent },
-  { path: 'secret-heroes', component: SecretHeroesComponent},
+  { path: 'secret-heroes', component: SecretHeroesComponent, canActivate: [AuthGuard]},
   { path: 'secret-detail/:id', component: SecretHeroDetailComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent }
 ];
