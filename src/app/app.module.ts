@@ -7,27 +7,27 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AppRoutingModule } from './app-routing.module';
 
 // Imports for loading & configuring the in-memory web api
-//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { InMemoryDataService } from './in-memory-data.service';
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent }  from './app.component';
-import { DashboardComponent } from './dashboard.component';
-import { HeroDetailComponent } from './hero-detail.component';
-import { HeroesComponent } from './heroes.component';
-import { HeroService } from './hero.service';
-import { HeroSearchComponent } from './hero-search.component';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
-import { LoginComponent } from './login.component';
-import { SecretHeroesComponent } from './secret-heroes.component';
-import { SecretHeroDetailComponent } from './secret-hero-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroDetailComponent } from './heroes/hero-detail.component';
+import { HeroesComponent } from './heroes/heroes.component';
+import { HeroService } from './shared/hero.service';
+import { HeroSearchComponent } from './heroes/hero-search.component';
+import { AuthService } from './core/auth.service';
+import { AuthGuard } from './core/auth-guard.service';
+import { LoginComponent } from './login/login.component';
+import { SecretHeroesComponent } from './secret-heroes/secret-heroes.component';
+import { SecretHeroDetailComponent } from './secret-heroes/secret-hero-detail.component';
 
 @NgModule({
   imports:      [
     BrowserModule,
     FormsModule,
     HttpModule,
-    //InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   declarations: [

@@ -3,3 +3,4 @@
 -   [ ] Fix search, possibly in server
 -   [ ] After login the user should be redirected some place sensible
 -   [ ] Add tests
+-   [x] Restructure according to <https://angular.io/guide/styleguide#style-04-06>
