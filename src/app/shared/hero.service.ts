@@ -10,7 +10,7 @@ import { Hero } from './hero';
 export class HeroService {
 
   private heroesUrl = 'http://localhost:3002/api/public/heroes'; // URL to web api
-  private secretHeroesUrl = 'http://localhost:3002/api/secret/heroes'; // URL to web api
+  private secretHeroesUrl = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
@@ -22,7 +22,7 @@ export class HeroService {
     .catch(this.handleError);
   }
 
-  getHero(id: number): Promise<Hero> {
+  getHero(id: string): Promise<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get(url)
     .toPromise()
@@ -47,7 +47,7 @@ export class HeroService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
+  delete(id: string): Promise<void> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
@@ -67,7 +67,7 @@ export class HeroService {
   }
 
 // Get secret hero
-  getSecretHero(id: number): Promise<Hero> {
+  getSecretHero(id: string): Promise<Hero> {
     const url = `${this.secretHeroesUrl}/${id}`;
     return this.authHttp.get(url)
     .toPromise()
