@@ -36,10 +36,10 @@ export class SecretHeroesComponent implements OnInit {
     this.router.navigate(['secret-detail', this.selectedHero.id]);
   }
 
-  addSecretHero(name: string): void {
+  addSecretHero(name: string, codeName: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.createSecret(name)
+    this.heroService.createSecret(name, codeName)
       .then(hero => {
         this.secretHeroes.push(hero);
         this.selectedHero = null;

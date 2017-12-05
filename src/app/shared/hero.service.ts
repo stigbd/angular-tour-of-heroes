@@ -76,9 +76,9 @@ export class HeroService {
   }
 
   // Create secret hero
-  createSecret(name: string): Promise<Hero> {
+  createSecret(name: string, codeName: string): Promise<Hero> {
     return this.authHttp
-      .post(this.secretHeroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.secretHeroesUrl, JSON.stringify({name: name, codeName: codeName}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Hero)
       .catch(this.handleError);
