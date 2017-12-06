@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 
@@ -27,6 +28,7 @@ import { SecretHeroDetailComponent } from './secret-heroes/secret-hero-detail.co
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],

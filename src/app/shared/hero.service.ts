@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Headers, Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';
@@ -13,13 +15,10 @@ export class HeroService {
   private secretHeroesUrl = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http, private authHttp: AuthHttp) { }
+  constructor(private http: Http, private httpClient: HttpClient, private authHttp: AuthHttp) { }
 
-  getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
-    .toPromise()
-    .then(response => response.json() as Hero[])
-    .catch(this.handleError);
+  getHeroes(): Observable<Hero[]> {
+    return this.httpClient.get<Hero[]>(this.heroesUrl)
   }
 
   getHero(id: string): Promise<Hero> {
