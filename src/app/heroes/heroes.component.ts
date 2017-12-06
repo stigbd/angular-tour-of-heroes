@@ -37,19 +37,18 @@ export class HeroesComponent implements OnInit  {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.create(name)
-      .then(hero => {
+    this.heroService.create({ name } as Hero)
+      .subscribe(hero => {
         this.heroes.push(hero);
         this.selectedHero = null;
     });
   }
 
   delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    if (this.selectedHero === hero) { this.selectedHero = null; }
     this.heroService
-      .delete(hero.id)
-      .then(() => {
-        this.heroes = this.heroes.filter(h => h !== hero);
-        if (this.selectedHero === hero) { this.selectedHero = null; }
-      });
+      .delete(hero)
+      .subscribe();
   }
 }

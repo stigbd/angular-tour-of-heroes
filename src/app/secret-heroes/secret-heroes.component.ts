@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from '../shared/hero';
-import { HeroService } from '../shared/hero.service';
+import { SecretHeroService } from '../shared/secrethero.service';
 
 @Component({
   selector: 'my-secret-heroes',
@@ -16,7 +16,7 @@ export class SecretHeroesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroService: HeroService) { }
+    private heroService: SecretHeroService) { }
 
   ngOnInit(): void {
     this.getSecretHeroes();

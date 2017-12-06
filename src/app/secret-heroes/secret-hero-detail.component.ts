@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { Hero } from '../shared/hero';
-import { HeroService } from '../shared/hero.service';
+import { SecretHeroService } from '../shared/secrethero.service';
 
 @Component({
   selector: 'my-secret-hero-detail',
@@ -18,7 +18,7 @@ export class SecretHeroDetailComponent implements OnInit {
   hero: Hero;
 
   constructor(
-    private heroService: HeroService,
+    private heroService: SecretHeroService,
     private route: ActivatedRoute,
     private location: Location,
   ) { }

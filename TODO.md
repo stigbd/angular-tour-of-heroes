@@ -4,4 +4,5 @@
 -   [ ] After login the user should be redirected some place sensible
 -   [ ] Add tests
 -   [x] Restructure according to <https://angular.io/guide/styleguide#style-04-06>
--   [ ] Refator hero-service to use Observable cf <https://angular.io/tutorial/toh-pt6> and <https://stackoverflow.com/questions/35316583/angular2-http-at-an-interval>
+-   [x] Refator hero-service to use Observable cf <https://angular.io/tutorial/toh-pt6> and <https://stackoverflow.com/questions/35316583/angular2-http-at-an-interval>
+-   [ ] Refator secrethero-service to use Observable and remove use of angular2-jwt

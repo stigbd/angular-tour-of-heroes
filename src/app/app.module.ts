@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './heroes/hero-detail.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroService } from './shared/hero.service';
+import { SecretHeroService } from './shared/secrethero.service';
 import { HeroSearchComponent } from './heroes/hero-search.component';
 import { AuthService } from './core/auth.service';
 import { AuthGuard } from './core/auth-guard.service';
@@ -48,6 +49,7 @@ import { MessagesComponent } from './messages/messages.component';
   ],
   providers: [
     HeroService,
+    SecretHeroService,
     AUTH_PROVIDERS,
     AuthService,
     AuthGuard,
