@@ -22,6 +22,9 @@ import { AuthGuard } from './core/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { SecretHeroesComponent } from './secret-heroes/secret-heroes.component';
 import { SecretHeroDetailComponent } from './secret-heroes/secret-hero-detail.component';
+import { MessageService } from './shared/message.service';
+import { MessagesComponent } from './messages/messages.component';
+
 
 @NgModule({
   imports:      [
@@ -40,13 +43,15 @@ import { SecretHeroDetailComponent } from './secret-heroes/secret-hero-detail.co
     HeroSearchComponent,
     SecretHeroesComponent,
     SecretHeroDetailComponent,
-    LoginComponent
+    LoginComponent,
+    MessagesComponent
   ],
   providers: [
     HeroService,
     AUTH_PROVIDERS,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    MessageService
   ],
   bootstrap:    [ AppComponent ]
 })

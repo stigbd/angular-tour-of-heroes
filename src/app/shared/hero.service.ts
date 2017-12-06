@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './hero';
+import { MessageService } from './message.service';
 
 @Injectable()
 export class HeroService {
@@ -15,9 +16,15 @@ export class HeroService {
   private secretHeroesUrl = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http, private httpClient: HttpClient, private authHttp: AuthHttp) { }
+  constructor(
+    private http: Http,
+    private httpClient: HttpClient,
+    private authHttp: AuthHttp,
+    private messageService: MessageService) { }
 
   getHeroes(): Observable<Hero[]> {
+    // Todo: send the message _after_ fetching the heroes
+    this.messageService.add('HeroService: fecthed heroes');
     return this.httpClient.get<Hero[]>(this.heroesUrl)
   }
 
