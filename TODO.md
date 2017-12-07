@@ -8,7 +8,7 @@
 -   [x] Refator secrethero-service to use Observable and remove use of angular2-jwt
 -   [x] Auth-service remove use of angular2-jwt
 -   [x] Refator auth-service to use Observable, i.e. remove use of deprecated Http-module
--   [ ] Use Message-service in auth-service.
--   [ ] Refator search-service to use Observable
+-   [x] Use Message-service in auth-service.
+-   [x] Refator search-service to use Observable
 -   [ ] Add search by codeName to secret heroes
 -   [ ] Make app auto-update when new heroes are added to server. (Observable intervall)
