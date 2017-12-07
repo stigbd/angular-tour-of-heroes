@@ -5,5 +5,8 @@
 -   [ ] Add tests
 -   [x] Restructure according to <https://angular.io/guide/styleguide#style-04-06>
 -   [x] Refator hero-service to use Observable cf <https://angular.io/tutorial/toh-pt6> and <https://stackoverflow.com/questions/35316583/angular2-http-at-an-interval>
--   [ ] Refator secrethero-service to use Observable and remove use of angular2-jwt
+-   [x] Refator secrethero-service to use Observable and remove use of angular2-jwt
+-   [ ] Refator auth-service to use Observable and remove use of angular2-jwt, cf <https://angular.io/guide/http#setting-new-headers>
+-   [ ] Refator search-service to use Observable and remove use of angular2-jwt
+-   [ ] Add search to secret heroes (reuse?)
 -   [ ] Make app auto-update when new heroes are added to server. (Observable intervall)

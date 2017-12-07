@@ -34,4 +34,8 @@ export class AuthService {
   loggedIn() {
     return tokenNotExpired();
   }
+
+  getAuthorizationHeader() {
+    return 'Bearer ' + localStorage.getItem('token');
+  }
 }

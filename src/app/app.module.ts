@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -25,7 +25,7 @@ import { SecretHeroesComponent } from './secret-heroes/secret-heroes.component';
 import { SecretHeroDetailComponent } from './secret-heroes/secret-hero-detail.component';
 import { MessageService } from './shared/message.service';
 import { MessagesComponent } from './messages/messages.component';
-
+import { AuthInterceptor } from './core/authinterceptor';
 
 @NgModule({
   imports:      [
@@ -50,7 +50,11 @@ import { MessagesComponent } from './messages/messages.component';
   providers: [
     HeroService,
     SecretHeroService,
-    AUTH_PROVIDERS,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     AuthService,
     AuthGuard,
     MessageService
