@@ -25,7 +25,7 @@ import { SecretHeroesComponent } from './secret-heroes/secret-heroes.component';
 import { SecretHeroDetailComponent } from './secret-heroes/secret-hero-detail.component';
 import { MessageService } from './shared/message.service';
 import { MessagesComponent } from './messages/messages.component';
-import { AuthInterceptor } from './core/authinterceptor';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 @NgModule({
   imports:      [

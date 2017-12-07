@@ -16,7 +16,10 @@ export class LoginComponent {
 
   constructor(private auth: AuthService) { }
 
+/*
+subscribe(heroes => this.heroes = heroes);
+*/
   onLogin(credentials: any) {
-    this.auth.login(credentials);
+    this.auth.login(credentials).subscribe();
   }
 }

@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/map';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of'
+import { catchError, map, tap } from 'rxjs/operators';
+
+import { MessageService } from '../shared/message.service';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable()
 export class AuthService {
   private token: string;
+  private url = 'http://localhost:3003/authenticate'; // URL to web api
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private messageService: MessageService) { }
 
-  login(credentials: any) {
-    this.http.post('http://localhost:3003/authenticate', credentials)
-    .map(res => res.json())
-    .subscribe(
-      // We're assuming the response will be an object
-      // with the JWT
-      data => {
-        this.token = data.token
-        localStorage.setItem('token', data.token)
-      },
-      error => {
-        this.token = null;
-        console.error(error)
-      }
+  login(credentials: any): Observable<string> {
+    return this.http.post(this.url, credentials, httpOptions)
+    .pipe(
+      tap((token: string) => {
+        this.token = token;
+        localStorage.setItem('token', token);
+        this.log(`logged in user=${credentials.email}`);
+        this.router.navigateByUrl('/dashboard');
+      }),
+      catchError(this.handleError<string>('addHero'))
     );
-    this.router.navigateByUrl('/dashboard');
   }
 
   logout() {
@@ -44,4 +52,17 @@ export class AuthService {
   getAuthorizationHeader() {
     return 'Bearer ' + localStorage.getItem('token');
   }
+  // ------------- Error handling ---------------------
+    private handleError<T> (operation = 'operation', result?: T) {
+      return (error: any): Observable<T> => {
+          console.error(error) // for demo purposes only
+          this.log(`${operation} failed: ${error.message}`);
+          return of(result as T);
+      };
+    }
+
+    private log(message: string) {
+      this.messageService.add('HeroService: ' + message);
+    }
+
 }
