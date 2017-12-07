@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Hero } from '../shared/hero';
+import { SecretHero } from '../shared/secrethero';
 import { SecretHeroService } from '../shared/secrethero.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { SecretHeroService } from '../shared/secrethero.service';
 })
 
 export class SecretHeroesComponent implements OnInit {
-  secretHeroes: Hero[];
-  selectedHero: Hero;
+  secretHeroes: SecretHero[];
+  selectedHero: SecretHero;
 
   constructor(
     private router: Router,
@@ -25,11 +25,11 @@ export class SecretHeroesComponent implements OnInit {
   getSecretHeroes(): void {
     this.heroService
       .getSecretHeroes()
-      .then(heroes => this.secretHeroes = heroes)
+      .then(secretHeroes => this.secretHeroes = secretHeroes)
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
+  onSelect(secretHero: SecretHero): void {
+    this.selectedHero = secretHero;
   }
 
   gotoDetail(): void {
@@ -40,18 +40,18 @@ export class SecretHeroesComponent implements OnInit {
     name = name.trim();
     if (!name) { return; }
     this.heroService.createSecret(name, codeName)
-      .then(hero => {
-        this.secretHeroes.push(hero);
+      .then(secretHero => {
+        this.secretHeroes.push(secretHero);
         this.selectedHero = null;
       });
   }
 
-  deleteSecretHero(hero: Hero): void {
+  deleteSecretHero(secretHero: SecretHero): void {
     this.heroService
-      .deleteSecret(hero)
+      .deleteSecret(secretHero)
       .then(res => {
-        this.secretHeroes = this.secretHeroes.filter(h => h !== hero);
-        if (this.selectedHero === hero) { this.selectedHero = null}
+        this.secretHeroes = this.secretHeroes.filter(h => h !== secretHero);
+        if (this.selectedHero === secretHero) { this.selectedHero = null}
       })
   }
 }

@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import 'rxjs/add/operator/switchMap';
 
-import { Hero } from '../shared/hero';
+import { SecretHero } from '../shared/secrethero';
 import { SecretHeroService } from '../shared/secrethero.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { SecretHeroService } from '../shared/secrethero.service';
 
 export class SecretHeroDetailComponent implements OnInit {
 
-  hero: Hero;
+  secretHero: SecretHero;
 
   constructor(
     private heroService: SecretHeroService,
@@ -26,15 +26,15 @@ export class SecretHeroDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap
     .switchMap((params: ParamMap) => this.heroService.getSecretHero(params.get('id')))
-    .subscribe(hero => this.hero = hero);
+    .subscribe(hero => this.secretHero = hero);
   }
 
   save(): void {
-    this.heroService.updateSecret(this.hero)
+    this.heroService.updateSecret(this.secretHero)
     .then(() => this.goBack());
   }
 
-  goBack(savedHero: Hero = null): void {
+  goBack(savedHero: SecretHero = null): void {
     this.location.back();
   }
 }

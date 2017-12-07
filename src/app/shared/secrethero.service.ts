@@ -4,7 +4,7 @@ import { AuthHttp } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Hero } from './hero';
+import { SecretHero } from './secrethero';
 
 @Injectable()
 export class SecretHeroService {
@@ -14,37 +14,37 @@ export class SecretHeroService {
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
 
-// ------------- Secret heroes ----------------------
+// ------------- Secret SecretHeroes ----------------------
 
-// Get all secret heroes
-  getSecretHeroes(): Promise<Hero[]> {
+// Get all secret SecretHeroes
+  getSecretHeroes(): Promise<SecretHero[]> {
     return this.authHttp
       .get(this.secretHeroesUrl)
       .toPromise()
-      .then(response => response.json() as Hero[])
+      .then(response => response.json() as SecretHero[])
       .catch(this.handleError);
   }
 
-// Get secret hero
-  getSecretHero(id: string): Promise<Hero> {
+// Get secret SecretHero
+  getSecretHero(id: string): Promise<SecretHero> {
     const url = `${this.secretHeroesUrl}/${id}`;
     return this.authHttp.get(url)
     .toPromise()
-    .then(response => response.json() as Hero)
+    .then(response => response.json() as SecretHero)
     .catch(this.handleError)
   }
 
-  // Create secret hero
-  createSecret(name: string, codeName: string): Promise<Hero> {
+  // Create secret SecretHero
+  createSecret(name: string, codeName: string): Promise<SecretHero> {
     return this.authHttp
       .post(this.secretHeroesUrl, JSON.stringify({name: name, codeName: codeName}), {headers: this.headers})
       .toPromise()
-      .then(res => res.json() as Hero)
+      .then(res => res.json() as SecretHero)
       .catch(this.handleError);
   }
 
-  // Delete secret hero
-  deleteSecret(hero: Hero): Promise<Response> {
+  // Delete secret SecretHero
+  deleteSecret(hero: SecretHero): Promise<Response> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
@@ -56,12 +56,12 @@ export class SecretHeroService {
       .catch(this.handleError);
   }
 
-  updateSecret(hero: Hero): Promise<Hero> {
+  updateSecret(hero: SecretHero): Promise<SecretHero> {
     const url = `${this.secretHeroesUrl}/${hero.id}`;
     return this.authHttp
     .put(url, JSON.stringify(hero), {headers: this.headers})
     .toPromise()
-    .then(() => hero)
+    .then(() => SecretHero)
     .catch(this.handleError);
   }
 
