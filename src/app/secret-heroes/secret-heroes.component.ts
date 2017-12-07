@@ -25,7 +25,7 @@ export class SecretHeroesComponent implements OnInit {
   getSecretHeroes(): void {
     this.heroService
       .getSecretHeroes()
-      .then(secretHeroes => this.secretHeroes = secretHeroes)
+      .subscribe(secretHeroes => this.secretHeroes = secretHeroes)
   }
 
   onSelect(secretHero: SecretHero): void {
@@ -39,8 +39,8 @@ export class SecretHeroesComponent implements OnInit {
   addSecretHero(name: string, codeName: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.createSecret(name, codeName)
-      .then(secretHero => {
+    this.heroService.createSecret({name, codeName} as SecretHero)
+      .subscribe(secretHero => {
         this.secretHeroes.push(secretHero);
         this.selectedHero = null;
       });
@@ -48,8 +48,8 @@ export class SecretHeroesComponent implements OnInit {
 
   deleteSecretHero(secretHero: SecretHero): void {
     this.heroService
-      .deleteSecret(secretHero)
-      .then(res => {
+      .delete(secretHero)
+      .subscribe(res => {
         this.secretHeroes = this.secretHeroes.filter(h => h !== secretHero);
         if (this.selectedHero === secretHero) { this.selectedHero = null}
       })

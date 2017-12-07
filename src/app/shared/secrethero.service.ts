@@ -1,73 +1,89 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { AuthHttp } from 'angular2-jwt';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of'
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { SecretHero } from './secrethero';
+import { MessageService } from './message.service';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable()
 export class SecretHeroService {
 
-  private secretHeroesUrl = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private url = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
 
-  constructor(private http: Http, private authHttp: AuthHttp) { }
-
-// ------------- Secret SecretHeroes ----------------------
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) { }
 
 // Get all secret SecretHeroes
-  getSecretHeroes(): Promise<SecretHero[]> {
-    return this.authHttp
-      .get(this.secretHeroesUrl)
-      .toPromise()
-      .then(response => response.json() as SecretHero[])
-      .catch(this.handleError);
+  getSecretHeroes(): Observable<SecretHero[]> {
+    return this.http.get<SecretHero[]>(this.url)
+      .pipe(
+        tap(secretHeroes => this.log('fetched secret heroes')),
+        catchError(this.handleError('getSecretHeroes', []))
+      )
   }
 
 // Get secret SecretHero
-  getSecretHero(id: string): Promise<SecretHero> {
-    const url = `${this.secretHeroesUrl}/${id}`;
-    return this.authHttp.get(url)
-    .toPromise()
-    .then(response => response.json() as SecretHero)
-    .catch(this.handleError)
+  getSecretHero(id: string): Observable<SecretHero> {
+    const url = `${this.url}/${id}`;
+    return this.http.get<SecretHero>(url)
+      .pipe(
+        tap(_ => this.log(`fetched secret hero id=${id}`)),
+        catchError(this.handleError<SecretHero>(`getSecretHero id=${id}`))
+    )
   }
 
+
   // Create secret SecretHero
-  createSecret(name: string, codeName: string): Promise<SecretHero> {
-    return this.authHttp
-      .post(this.secretHeroesUrl, JSON.stringify({name: name, codeName: codeName}), {headers: this.headers})
-      .toPromise()
-      .then(res => res.json() as SecretHero)
-      .catch(this.handleError);
+  createSecret(secretHero: SecretHero): Observable<SecretHero> {
+    return this.http
+      .post(this.url, secretHero, httpOptions)
+        .pipe(
+          tap((secretHero: SecretHero) => this.log(`added secret hero w/ id=${secretHero.id}`)),
+          catchError(this.handleError<SecretHero>('createSecret'))
+        );
   }
 
   // Delete secret SecretHero
-  deleteSecret(hero: SecretHero): Promise<Response> {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+  delete(secretHero: SecretHero | number): Observable<SecretHero> {
+    const id = typeof secretHero === 'number' ? secretHero : secretHero.id;
+    const url = `${this.url}/${id}`;
 
-    let url = `${this.secretHeroesUrl}/${hero.id}`;
-
-    return this.authHttp
-      .delete(url, { headers: headers })
-      .toPromise()
-      .catch(this.handleError);
+    return this.http.delete<SecretHero>(url, httpOptions)
+      .pipe(
+        tap(_ => this.log(`deleted secret hero id=${id}`))
+      );
   }
 
-  updateSecret(hero: SecretHero): Promise<SecretHero> {
-    const url = `${this.secretHeroesUrl}/${hero.id}`;
-    return this.authHttp
-    .put(url, JSON.stringify(hero), {headers: this.headers})
-    .toPromise()
-    .then(() => SecretHero)
-    .catch(this.handleError);
+// Update secret hero
+  update(secretHero: SecretHero): Observable<SecretHero> {
+    const url = `${this.url}/${secretHero.id}`;
+    return this.http
+    .put(url, secretHero, httpOptions)
+      .pipe(
+        tap(_ => this.log(`updated secret hero id=${secretHero.id}`)),
+        catchError(this.handleError<any>('update'))
+      );
   }
 
 // ------------- Error handling ---------------------
-  private handleError(error: any): Promise<any> {
-    console.error('An error occured', error) // for demo purposes only
-    return Promise.reject(error.message || error);
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+        console.error(error) // for demo purposes only
+        this.log(`${operation} failed: ${error.message}`);
+        return of(result as T);
+    };
+  }
+
+  private log(message: string) {
+    this.messageService.add('SecretHeroService: ' + message);
   }
 }

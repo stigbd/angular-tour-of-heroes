@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { AuthHttp } from 'angular2-jwt';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of'
@@ -17,12 +16,9 @@ const httpOptions = {
 export class HeroService {
 
   private heroesUrl = 'http://localhost:3002/api/public/heroes'; // URL to web api
-  private secretHeroesUrl = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
 
   constructor(
     private http: HttpClient,
-    private httpClient: HttpClient,
-    private authHttp: AuthHttp,
     private messageService: MessageService) { }
 
   getHeroes(): Observable<Hero[]> {
