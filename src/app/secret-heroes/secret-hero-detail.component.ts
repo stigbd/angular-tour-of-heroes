@@ -25,13 +25,13 @@ export class SecretHeroDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-    .switchMap((params: ParamMap) => this.heroService.getSecretHero(params.get('id')))
+    .switchMap((params: ParamMap) => this.heroService.getById(params.get('id')))
     .subscribe(hero => this.secretHero = hero);
   }
 
   save(): void {
-    this.heroService.updateSecret(this.secretHero)
-    .then(() => this.goBack());
+    this.heroService.update(this.secretHero)
+    .subscribe(() => this.goBack());
   }
 
   goBack(savedHero: SecretHero = null): void {

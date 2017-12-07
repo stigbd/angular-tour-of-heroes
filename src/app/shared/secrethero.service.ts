@@ -23,7 +23,7 @@ export class SecretHeroService {
   ) { }
 
 // Get all secret SecretHeroes
-  getSecretHeroes(): Observable<SecretHero[]> {
+  get(): Observable<SecretHero[]> {
     return this.http.get<SecretHero[]>(this.url)
       .pipe(
         tap(secretHeroes => this.log('fetched secret heroes')),
@@ -32,7 +32,7 @@ export class SecretHeroService {
   }
 
 // Get secret SecretHero
-  getSecretHero(id: string): Observable<SecretHero> {
+  getById(id: string): Observable<SecretHero> {
     const url = `${this.url}/${id}`;
     return this.http.get<SecretHero>(url)
       .pipe(
@@ -43,7 +43,7 @@ export class SecretHeroService {
 
 
   // Create secret SecretHero
-  createSecret(secretHero: SecretHero): Observable<SecretHero> {
+  create(secretHero: SecretHero): Observable<SecretHero> {
     return this.http
       .post(this.url, secretHero, httpOptions)
         .pipe(

@@ -14,21 +14,23 @@ const httpOptions = {
 
 @Injectable()
 export class AuthService {
-  private token: string;
   private url = 'http://localhost:3003/authenticate'; // URL to web api
+  private token: string;
+  private currentUser: string;
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private messageService: MessageService) { }
 
-  login(credentials: any): Observable<string> {
+  login(credentials: any): Observable<any> {
     return this.http.post(this.url, credentials, httpOptions)
     .pipe(
-      tap((token: string) => {
-        this.token = token;
-        localStorage.setItem('token', token);
-        this.log(`logged in user=${credentials.email}`);
+      tap((res: any) => {
+        this.token = res.token;
+        this.currentUser = credentials.email;
+        localStorage.setItem('token', this.token);
+        this.log(`logged in user=${this.currentUser}`);
         this.router.navigateByUrl('/dashboard');
       }),
       catchError(this.handleError<string>('addHero'))
@@ -40,6 +42,7 @@ export class AuthService {
     // from local storage
     this.token = null;
     localStorage.removeItem('token');
+    this.log(`logged out user: ${this.currentUser}`);
     // Send the user back to the dashboard after logout
     this.router.navigateByUrl('/dashboard');
   }
@@ -50,12 +53,12 @@ export class AuthService {
   }
 
   getAuthorizationHeader() {
-    return 'Bearer ' + localStorage.getItem('token');
+    return 'Bearer ' + this.token;
   }
+
   // ------------- Error handling ---------------------
     private handleError<T> (operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
-          console.error(error) // for demo purposes only
           this.log(`${operation} failed: ${error.message}`);
           return of(result as T);
       };
