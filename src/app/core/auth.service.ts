@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-declare var Auth0Lock: any;
-
 @Injectable()
 export class AuthService {
+  private token: string;
 
   constructor(private http: Http, private router: Router) { }
 
@@ -17,8 +15,14 @@ export class AuthService {
     .subscribe(
       // We're assuming the response will be an object
       // with the JWT
-      data => localStorage.setItem('token', data.token),
-      error => console.error(error)
+      data => {
+        this.token = data.token
+        localStorage.setItem('token', data.token)
+      },
+      error => {
+        this.token = null;
+        console.error(error)
+      }
     );
     this.router.navigateByUrl('/dashboard');
   }
@@ -26,13 +30,15 @@ export class AuthService {
   logout() {
     // To log out, just remove the token and profile
     // from local storage
+    this.token = null;
     localStorage.removeItem('token');
     // Send the user back to the dashboard after logout
     this.router.navigateByUrl('/dashboard');
   }
 
   loggedIn() {
-    return tokenNotExpired();
+    if (this.token) { return true; }
+    return false;
   }
 
   getAuthorizationHeader() {
