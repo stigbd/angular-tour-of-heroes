@@ -11,4 +11,4 @@
 -   [x] Use Message-service in auth-service.
 -   [x] Refator search-service to use Observable
 -   [ ] Add search by codeName to secret heroes
--   [ ] Make app auto-update when new heroes are added to server. (Observable intervall)
+-   [x] Make app auto-update when new heroes are added to server. (Observable intervall)

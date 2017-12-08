@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Hero } from '../shared/hero';
 import { HeroService } from '../shared/hero.service';
 
+import { Observable } from 'rxjs';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
+
 @Component({
   selector: 'my-heroes',
   templateUrl: './heroes.component.html',
@@ -22,10 +25,12 @@ export class HeroesComponent implements OnInit  {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    TimerObservable.create(0, 1000)
+      .subscribe(() => {
+        this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
+      })
   }
-
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
