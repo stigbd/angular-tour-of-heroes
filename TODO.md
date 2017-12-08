@@ -12,3 +12,6 @@
 -   [x] Refator search-service to use Observable
 -   [ ] Add search by codeName to secret heroes
 -   [x] Make app auto-update when new heroes are added to server. (Observable intervall)
+-   [ ] Implement a simple cache service interceptor, cf <https://angular.io/guide/http#caching>
+-   [ ] Make host-part of external services configurable
+-   [ ] Fix docker-compose accordingly
