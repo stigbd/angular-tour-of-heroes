@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 
 interface Credentials {
-  username: string,
-  password: string
+  username: string;
+  password: string;
 }
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   templateUrl: './login.component.html'
 })
 

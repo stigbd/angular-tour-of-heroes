@@ -4,7 +4,7 @@ import { Hero } from '../shared/hero';
 import { HeroService } from '../shared/hero.service';
 
 @Component({
-  selector: 'my-dashboard',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.css' ]
 })

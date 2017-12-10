@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of'
+import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from '../shared/message.service';

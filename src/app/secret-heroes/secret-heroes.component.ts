@@ -5,7 +5,7 @@ import { SecretHero } from '../shared/secrethero';
 import { SecretHeroService } from '../shared/secrethero.service';
 
 @Component({
-  selector: 'my-secret-heroes',
+  selector: 'app-secret-heroes',
   templateUrl: './secret-heroes.component.html',
   styleUrls: ['./secret-heroes.component.css']
 })
@@ -25,7 +25,7 @@ export class SecretHeroesComponent implements OnInit {
   getSecretHeroes(): void {
     this.heroService
       .get()
-      .subscribe(secretHeroes => this.secretHeroes = secretHeroes)
+      .subscribe(secretHeroes => this.secretHeroes = secretHeroes);
   }
 
   onSelect(secretHero: SecretHero): void {
@@ -51,7 +51,7 @@ export class SecretHeroesComponent implements OnInit {
       .delete(secretHero)
       .subscribe(res => {
         this.secretHeroes = this.secretHeroes.filter(h => h !== secretHero);
-        if (this.selectedHero === secretHero) { this.selectedHero = null}
-      })
+        if (this.selectedHero === secretHero) { this.selectedHero = null; }
+      });
   }
 }

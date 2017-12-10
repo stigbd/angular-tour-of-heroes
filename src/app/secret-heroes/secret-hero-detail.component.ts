@@ -8,7 +8,7 @@ import { SecretHero } from '../shared/secrethero';
 import { SecretHeroService } from '../shared/secrethero.service';
 
 @Component({
-  selector: 'my-secret-hero-detail',
+  selector: 'app-secret-hero-detail',
   templateUrl: './secret-hero-detail.component.html',
   styleUrls: ['./secret-hero-detail.component.css']
 })

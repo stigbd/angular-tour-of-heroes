@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Hero } from '../shared/hero';
 import { HeroService } from '../shared/hero.service';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 
 @Component({
-  selector: 'my-heroes',
+  selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: [ './heroes.component.css' ]
 })
@@ -29,7 +29,7 @@ export class HeroesComponent implements OnInit  {
       .subscribe(() => {
         this.heroService.getHeroes()
         .subscribe(heroes => this.heroes = heroes);
-      })
+      });
   }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
