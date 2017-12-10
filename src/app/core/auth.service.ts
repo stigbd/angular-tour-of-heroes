@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { MessageService } from '../shared/message.service';
 
 const httpOptions = {
@@ -14,7 +15,7 @@ const httpOptions = {
 
 @Injectable()
 export class AuthService {
-  private url = 'http://localhost:3003/authenticate'; // URL to web api
+  private url = environment.authenticationUrl; // URL to web api
   private token: string;
   private currentUser: string;
 

@@ -3,8 +3,20 @@ services:
   heroes-gui:
     build: .
     ports:
-      - "8880:3000"
-  heroes-api:
+      - "8880:4200"
+  heroes-service:
     build: ../angular-tour-of-heroes-server/.
     ports:
       - "3002:3002"
+    environment:
+      - DBHOST=database
+  authentication-service:
+    build: ../a-simple-authentication-service/.
+    ports:
+      - "3003:3003"
+    environment:
+      - DBHOST=database
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { Hero } from './hero';
 import { MessageService } from './message.service';
 
@@ -15,7 +16,7 @@ const httpOptions = {
 @Injectable()
 export class HeroService {
 
-  private heroesUrl = 'http://localhost:3002/api/public/heroes'; // URL to web api
+  private heroesUrl = environment.heroesUrl; // URL to web api
 
   constructor(
     private http: HttpClient,

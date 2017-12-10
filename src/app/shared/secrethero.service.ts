@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { SecretHero } from './secrethero';
 import { MessageService } from './message.service';
 
@@ -15,7 +16,7 @@ const httpOptions = {
 @Injectable()
 export class SecretHeroService {
 
-  private url = 'http://localhost:3002/api/secret/secretheroes'; // URL to web api
+  private url = environment.secreHeroesUrl; // URL to web api
 
   constructor(
     private http: HttpClient,
