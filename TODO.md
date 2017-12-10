@@ -13,5 +13,6 @@
 -   [ ] Add search by codeName to secret heroes
 -   [x] Make app auto-update when new heroes are added to server. (Observable intervall)
 -   [ ] Implement a simple cache service interceptor, cf <https://angular.io/guide/http#caching>
--   [ ] Make host-part of external services configurable
+-   [ ] Refactor project into an angular-cli project
+-   [ ] Make host-part of external services configurable with environments: <https://stackoverflow.com/questions/40424199/angular-2-testing-process-env>
 -   [ ] Fix docker-compose accordingly
