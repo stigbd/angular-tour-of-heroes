@@ -14,5 +14,5 @@
 -   [x] Make app auto-update when new heroes are added to server. (Observable intervall)
 -   [ ] Implement a simple cache service interceptor, cf <https://angular.io/guide/http#caching>
 -   [x] Refactor project into an angular-cli project
--   [ ] Make host-part of external services configurable with environments: <https://stackoverflow.com/questions/40424199/angular-2-testing-process-env>
--   [ ] Fix docker-compose accordingly
+-   [x] Make url of external services configurable with environments: <https://stackoverflow.com/questions/40424199/angular-2-testing-process-env>
+-   [x] Fix docker-compose accordingly, but check <https://medium.com/@avatsaev/create-efficient-angular-docker-images-with-multi-stage-builds-907e2be3008d> and  <https://medium.com/@tiangolo/angular-in-docker-with-nginx-supporting-environments-built-with-multi-stage-docker-builds-bb9f1724e984>

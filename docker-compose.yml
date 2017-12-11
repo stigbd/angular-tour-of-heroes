@@ -1,21 +1,25 @@
 version: "3"
 services:
   heroes-gui:
-    build: .
+    image: stigbd/heroes-gui
     ports:
-      - "8880:4200"
+      - "80:80"
   heroes-service:
-    build: ../angular-tour-of-heroes-server/.
+    image: stigbd/heroes-service
     ports:
       - "3002:3002"
     environment:
       - DBHOST=database
+    depends_on:
+      - database
   authentication-service:
-    build: ../a-simple-authentication-service/.
+    image: stigbd/authentication-service
     ports:
       - "3003:3003"
     environment:
       - DBHOST=database
+    depends_on:
+      - database
   database:
     image: mongo
     ports:
