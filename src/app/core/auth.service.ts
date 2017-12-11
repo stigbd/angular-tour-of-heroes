@@ -34,7 +34,7 @@ export class AuthService {
         this.log(`logged in user=${this.currentUser}`);
         this.router.navigateByUrl('/dashboard');
       }),
-      catchError(this.handleError<string>('addHero'))
+      catchError(this.handleError<string>('login'))
     );
   }
 
@@ -66,7 +66,7 @@ export class AuthService {
     }
 
     private log(message: string) {
-      this.messageService.add('HeroService: ' + message);
+      this.messageService.add('AuthService: ' + message);
     }
 
 }
