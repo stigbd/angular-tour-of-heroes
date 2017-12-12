@@ -2,7 +2,7 @@
 
 Based on [angular.io tutorial](https://angular.io/tutorial)
 
-An experimental project to learn Angular 2 and jwt.
+An experimental project to learn Angular 2, angular cli and jwt.
 
 ## Requirements
 
@@ -13,23 +13,24 @@ And then:
 ```
 $ nvm install node
 ```
-
+### Angular cli
+```
+$ npm install -g @angular/cli
+```
 ### A hero-api
 For example my express based server:
-
 <https://github.com/stigbd/angular-tour-of-heroes-server.git>
 
 ### A simple authentication server
 For example my simple express based authentication service:
-
 <https://github.com/stigbd/a-simple-authentiation-service.git>
 
 ## Usage
 ```
 $ git clone https://github.com/stigbd/angular-tour-of-heroes.git
 $ cd angular-tour-of-heroes
-$ npm install
-$ npm start
+$ npm install
+$ ng serve
 ```
 
 ## Background and credits
